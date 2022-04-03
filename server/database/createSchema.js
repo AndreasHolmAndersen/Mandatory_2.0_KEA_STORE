@@ -12,12 +12,13 @@ if (deleteMode) {
 db.exec(`CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username VARCHAR(100),
-    hashedPassword VARCHAR(100)
+    hashedPassword VARCHAR(100),
+    isLoggedIn VARCHAR(10)
 );`);
 
 // Seed my database
 if (deleteMode) {
-    db.run(`INSERT INTO users (username, hashedPassword) VALUES ('Admin', '$2b$12$L.Gb.f/dlemogGXMCiip2eff8tHdwfA0i63ZRrYDBNxdhz3.GnCVi')`);
+    db.run("INSERT INTO users (username, hashedPassword, isLoggedIn) VALUES ('Admin', '$2b$12$L.Gb.f/dlemogGXMCiip2eff8tHdwfA0i63ZRrYDBNxdhz3.GnCVi', 'true')");
    
 }
 

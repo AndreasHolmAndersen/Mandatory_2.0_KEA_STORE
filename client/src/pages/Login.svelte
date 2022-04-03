@@ -1,5 +1,6 @@
 <script>
     import { isLoggedIn } from "../store/store.js";
+    import { notify } from "../components/Notification";
 
     async function fetchLogin(e) {
         e.preventDefault();
@@ -9,9 +10,12 @@
             `http://localhost:8080/api/users`
         );
         const respData = await resp.json();
-        console.log(respData);
-        isLoggedIn.set(respData.isLoggedIn);
+        console.log(respData.data[0]);
+        isLoggedIn.set(respData.data[0].isLoggedIn);
         console.log($isLoggedIn);
+        
+        notify("Welcome " + respData.data[0].username);
+
     }
 </script>
 

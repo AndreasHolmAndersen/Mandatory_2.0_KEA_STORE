@@ -1,11 +1,21 @@
 <script>
+    import { notify } from "./Notification";
     import { Router, Link, Route } from "svelte-navigator";
     import Login from "../pages/Login.svelte";
     import About from "../pages/About.svelte";
     import Home from "../pages/Home.svelte";
+    import { isLoggedIn } from "../store/store";
+
+    export function logout(){
+        console.log($isLoggedIn);
+        isLoggedIn.set(false);
+        console.log($isLoggedIn);
+    }
+
+    
 </script>
 
-<Router>
+<Router primary={false}>
     <nav class="nav-bar">
         <div class="logo-container">
             <Link to="/"
@@ -19,9 +29,18 @@
             <li class="nav-item">
                 <Link to="/about" class="nav-anchors">About</Link>
             </li>
-            <li class="nav-item">
-                <Link to="/login" class="nav-anchors">Log in</Link>
-            </li>
+            {#if !$isLoggedIn}
+                <li class="nav-item">
+                    <Link to="/login" class="nav-anchors">Log in</Link>
+                </li>
+            {:else}
+                <li class="nav-item">
+                    <Link to="/" class="nav-anchors" on:click={()=>{
+                        logout();
+                        notify("youre now logged out");
+                        }}>Log out</Link>
+                </li>
+            {/if}
         </ul>
     </nav>
     <div>
@@ -36,7 +55,7 @@
         color: white !important;
         text-decoration: none !important;
         height: 100%;
-        font-family: "Helvetica Neue Condensed",sans-serif;
+        font-family: "Helvetica Neue Condensed", sans-serif;
     }
     .logo {
         height: 100px;

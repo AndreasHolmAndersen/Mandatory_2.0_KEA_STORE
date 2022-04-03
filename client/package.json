@@ -19,8 +19,8 @@
     "svelte": "^3.0.0"
   },
   "dependencies": {
-
     "sirv-cli": "^2.0.0",
-    "svelte-navigator": "^3.1.5"
+    "svelte-navigator": "^3.1.5",
+    "toast-notification-alert": "^1.0.5"
   }
 }
