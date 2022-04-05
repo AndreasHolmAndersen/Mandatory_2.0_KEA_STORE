@@ -1,10 +1,13 @@
 <script>
-    import { notify } from "./Notification";
+    import { notify } from "..utils/Notification";
     import { Router, Link, Route } from "svelte-navigator";
     import Login from "../pages/Login.svelte";
-    import About from "../pages/About.svelte";
+    import Contact from "../pages/Contact.svelte";
     import Home from "../pages/Home.svelte";
     import { isLoggedIn } from "../store/store";
+    import {toasts, ToastContainer, FlatToast }  from "svelte-toasts";
+
+
 
     export function logout(){
         console.log($isLoggedIn);
@@ -27,7 +30,7 @@
                 <Link to="/" class="nav-anchors">KEA Store</Link>
             </li>
             <li class="nav-item">
-                <Link to="/about" class="nav-anchors">About</Link>
+                <Link to="/contact" class="nav-anchors">Contact us</Link>
             </li>
             {#if !$isLoggedIn}
                 <li class="nav-item">
@@ -35,9 +38,10 @@
                 </li>
             {:else}
                 <li class="nav-item">
-                    <Link to="/" class="nav-anchors" on:click={()=>{
+                    <Link to="/" class="nav-anchors" on:click={ () => {
                         logout();
-                        notify("youre now logged out");
+                        // notify("youre now logged out");
+                        toasts.warning("youre now logged out");
                         }}>Log out</Link>
                 </li>
             {/if}
@@ -45,9 +49,12 @@
     </nav>
     <div>
         <Route path="/login" component={Login} />
-        <Route path="/about" component={About} />
+        <Route path="/contact" component={Contact} />
         <Route path="/" component={Home} />
     </div>
+
+    
+
 </Router>
 
 <style>
@@ -55,7 +62,7 @@
         color: white !important;
         text-decoration: none !important;
         height: 100%;
-        font-family: "Helvetica Neue Condensed", sans-serif;
+        
     }
     .logo {
         height: 100px;
@@ -79,6 +86,8 @@
         padding: 20px;
         color: #ffffff;
         text-decoration: none;
+        font-size: 1.2em;
+        text-transform: uppercase;
     }
     .nav-item:hover {
         background: #2b3e5a;

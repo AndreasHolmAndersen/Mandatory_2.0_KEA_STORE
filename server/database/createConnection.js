@@ -1,7 +1,14 @@
-import {open} from "sqlite";
-import  sqlite3  from "sqlite3";
+import { MongoClient } from 'mongodb';
 
-export const db = await open({
-    filename: 'keastore.db',
-    driver: sqlite3.Database
-});
+const url = 'mongodb://localhost:27017';
+
+const dbName = 'KeaStore';
+
+const client = await MongoClient.connect(url);
+
+const db = client.db(dbName);
+
+export default {
+    client: client,
+    users: db.collection('users')
+}

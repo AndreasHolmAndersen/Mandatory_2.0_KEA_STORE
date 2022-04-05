@@ -1,8 +1,8 @@
 {
     "type": "module",
     "scripts": {
-        "createdb": "node ../server/database/createSchema.js"
-      },
+        "seeddb": "node ../server/database/seedDatabase.js"
+    },
     "dependencies": {
         "bcrypt": "^5.0.1",
         "cors": "^2.8.5",
@@ -11,6 +11,8 @@
         "express-rate-limit": "^6.3.0",
         "express-session": "^1.17.2",
         "helmet": "^5.0.2",
+        "mongodb": "^4.5.0",
+        "nodemailer": "^6.7.3",
         "sqlite": "^4.0.25",
         "sqlite3": "^5.0.2"
     }
