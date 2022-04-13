@@ -1,11 +1,14 @@
 <script>
-    import { notify } from "..utils/Notification";
     import { Router, Link, Route } from "svelte-navigator";
     import Login from "../pages/Login.svelte";
     import Contact from "../pages/Contact.svelte";
     import Home from "../pages/Home.svelte";
-    import { isLoggedIn } from "../store/store";
-    import {toasts, ToastContainer, FlatToast }  from "svelte-toasts";
+    import { isLoggedIn } from "../stores/stores";
+    import {toasts }  from "svelte-toasts";
+    import PrivateRoute from "./PrivateRoute.svelte";
+    import Cart from "../pages/Cart.svelte";
+    
+    
 
 
 
@@ -29,9 +32,16 @@
             <li class="nav-item">
                 <Link to="/" class="nav-anchors">KEA Store</Link>
             </li>
+            
             <li class="nav-item">
                 <Link to="/contact" class="nav-anchors">Contact us</Link>
             </li>
+
+            <li class="nav-item">
+                <Link to="/cart" class="nav-anchors">Cart</Link>
+            </li>
+            
+
             {#if !$isLoggedIn}
                 <li class="nav-item">
                     <Link to="/login" class="nav-anchors">Log in</Link>
@@ -40,7 +50,6 @@
                 <li class="nav-item">
                     <Link to="/" class="nav-anchors" on:click={ () => {
                         logout();
-                        // notify("youre now logged out");
                         toasts.warning("youre now logged out");
                         }}>Log out</Link>
                 </li>
@@ -48,9 +57,21 @@
         </ul>
     </nav>
     <div>
+        
         <Route path="/login" component={Login} />
-        <Route path="/contact" component={Contact} />
-        <Route path="/" component={Home} />
+        
+       
+        <PrivateRoute path="contact" let:location>
+			<Contact/>
+		</PrivateRoute>
+
+        <PrivateRoute path="/" let:location>
+			<Home/>
+		</PrivateRoute>
+
+        <PrivateRoute path="/cart" let:location>
+			<Cart/>
+		</PrivateRoute>
     </div>
 
     

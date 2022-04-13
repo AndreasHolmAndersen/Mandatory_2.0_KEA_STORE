@@ -1,6 +1,10 @@
 <script>
-    import { isLoggedIn } from "../store/store.js";
+    import { isLoggedIn } from "../stores/stores.js";
     import { toasts } from "svelte-toasts";
+    import { useNavigate, useLocation } from "svelte-navigator";
+    
+    const navigate = useNavigate();
+    const location = useLocation();
 
     async function fetchLogin(e) {
         e.preventDefault();
@@ -11,7 +15,7 @@
         let respData = {};
         const data = {
             username,
-            password,
+            password
         };
 
         await fetch(url, {
@@ -27,6 +31,11 @@
 
         if (respData.isLoggedIn) {
             toasts.success("You're now logged in");
+            navigate("/", {
+                state: { from: $location.pathname },
+                replace: true,
+                
+            });
         } else {
             toasts.error("Wrong username or password");
         }
@@ -62,27 +71,27 @@
         margin: 15px;
         height: 30px;
         text-indent: 10px;
-        
+
         border: none;
         box-shadow: 1px 1px 1px #888888;
     }
-    button{
+    button {
         color: white;
-    text-transform: uppercase;
-    background-color: #233249;
-    border-width: 0;
-    height: 54px;
-    text-align: center !important;
-    padding: 0 1.25em;
-    width: auto;
-    box-shadow: 1px 1px 1px #888888;
+        text-transform: uppercase;
+        background-color: #233249;
+        border-width: 0;
+        height: 54px;
+        text-align: center !important;
+        padding: 0 1.25em;
+        width: auto;
+        box-shadow: 1px 1px 1px #888888;
     }
-    button:hover{
-    color: #fff;
-    background-color: #233249;
-    border-color: #233249;
+    button:hover {
+        color: #fff;
+        background-color: #233249;
+        border-color: #233249;
     }
-    h1{
+    h1 {
         text-transform: uppercase;
     }
 </style>

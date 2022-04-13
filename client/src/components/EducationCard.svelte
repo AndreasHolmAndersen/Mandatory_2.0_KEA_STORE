@@ -1,4 +1,7 @@
 <script>
+    import { cartItems } from "../stores/stores.js";
+    import { toasts } from "svelte-toasts";
+
     export const testEducationOne = {
         title: "COMPUTER SCIENCE",
         durationInYears: 2.5,
@@ -22,6 +25,21 @@
         educationGroup: "BYG",
         image: "/images/constructionManagement.jpeg",
     };
+
+    function addToCart(testEducation) {
+       const cartItem = {
+           title: testEducation.title,
+            durationInYears: testEducation.durationInYears,
+            ectsPoints: testEducation.ectsPoints,
+            educationGroup: testEducation.educationGroup,
+                        
+        }
+        
+        $cartItems = [...$cartItems, cartItem];
+       
+        console.log($cartItems);
+    }
+        
 </script>
 
 <div class="container">
@@ -32,10 +50,13 @@
         </div>
 
         <div class="card-items">{testEducationOne.title}</div>
-        <div class="card-items">{testEducationOne.durationInYears}</div>
-        <div class="card-items">{testEducationOne.ectsPoints}</div>
-        <div class="card-items">{testEducationOne.educationGroup}</div>
-        <button class="card-btn">Add to cart</button>
+        <div class="card-items">Duration: {testEducationOne.durationInYears}</div>
+        <div class="card-items">Ects point: {testEducationOne.ectsPoints}</div>
+        <div class="card-items">Education group: {testEducationOne.educationGroup}</div>
+        <button class="card-btn" on:click={() => { 
+            addToCart(testEducationOne); 
+            toasts.info(testEducationOne.title, " Added to cart");
+            }}>Add to cart</button>
     </div>
 
     <div class="card-container">
@@ -45,10 +66,13 @@
         </div>
 
         <div class="card-items">{testEducationTwo.title}</div>
-        <div class="card-items">{testEducationTwo.durationInYears}</div>
-        <div class="card-items">{testEducationTwo.ectsPoints}</div>
-        <div class="card-items">{testEducationTwo.educationGroup}</div>
-        <button class="card-btn">Add to cart</button>
+        <div class="card-items">Duration: {testEducationTwo.durationInYears}</div>
+        <div class="card-items">Ects point: {testEducationTwo.ectsPoints}</div>
+        <div class="card-items">Education group: {testEducationTwo.educationGroup}</div>
+        <button class="card-btn" on:click={() => { 
+            addToCart(testEducationTwo); 
+            toasts.info(testEducationTwo.title, " Added to cart");
+            }}>Add to cart</button>
     </div>
 
     <div class="card-container">
@@ -58,10 +82,15 @@
         </div>
 
         <div class="card-items">{testEducationThree.title}</div>
-        <div class="card-items">{testEducationThree.durationInYears}</div>
-        <div class="card-items">{testEducationThree.ectsPoints}</div>
-        <div class="card-items">{testEducationThree.educationGroup}</div>
-        <button class="card-btn">Add to cart</button>
+        <div class="card-items">Duration: {testEducationThree.durationInYears}</div>
+        <div class="card-items">Ects point: {testEducationThree.ectsPoints}</div>
+        <div class="card-items">Education group: {testEducationThree.educationGroup}</div>
+        <button class="card-btn" on:click={() => { 
+            addToCart(testEducationThree); 
+            toasts.info(testEducationThree.title, " Added to cart");
+            }}>Add to cart</button>
+
+
     </div>
 </div>
 
@@ -70,27 +99,50 @@
         background-color: #233249;
         display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
         flex-direction: column;
-        height: 300px;
-        width: 20vw;
+        height: 350px;
+        width: 25vw;
         margin-top: 20px;
-        border-radius: 5%;
+        border-radius: 5px;
+        box-shadow: 1px 1px 1px #888888;
     }
     .container {
         display: flex;
         justify-content: space-around;
         align-items: center;
+        
     }
 
     .card-items {
         display: flex;
         color: #ffffff;
         font-family: "Helvetica Neue Condensed",sans-serif;
+        justify-content: center;
+        padding: 2px;
+        
     }
 
     .card-item-image {
-        max-width: 100%;
+        max-width: 75%;
         height: auto;
+        display: flex;
+       
+        padding: 15px;
+        
+    }
+    .card-btn {
+        
+        text-transform: uppercase;
+        color: white;
+        background-color: #eda29c;
+        border-width: 0;
+        height: 54px;
+        text-align: center !important;
+        padding: 0 1.25em;
+        width: auto;
+        box-shadow: 1px 1px 1px #888888;
+        transition-duration: 0.2s;
+        cursor: pointer;
     }
 </style>

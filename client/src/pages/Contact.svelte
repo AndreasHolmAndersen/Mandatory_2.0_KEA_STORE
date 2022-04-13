@@ -1,33 +1,47 @@
 <script>
-    import {toasts} from "svelte-toasts";
+    import { toasts } from "svelte-toasts";
     
     async function fetchContact(e){
         e.preventDefault();
+        
         const email = document.getElementById("input-user-email").value;
         const subject = document.getElementById("input-subject").value;
         const message = document.getElementById("input-message").value;
+        const name = document.getElementById("input-user-name").value;
 
         const url = "http://localhost:3000/api/contact";
-        let respData = {};
-        const data = {
+        
+        let data = {
             email,
             subject,
-            message
+            message,
+            name
         };
-        await fetch(url, {
+        const resp = await fetch(url, {
             method: "POST",
             body: JSON.stringify(data),
-            headers: { "Content-type": "application/json; charset=UTF-8" },
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                respData = data;
-                if (respData != null) {
-                    toasts.success("Your message has been sent");
-                } else {
-                    toasts.error("Something went wrong");
-                }
-            });
+            headers: { "Content-type": "application/json; charset=UTF-8" }
+        });
+        const respData = await resp.json();
+        if (respData != null) {
+            toasts.success("Message sent successfully!");
+            alert(`Click here to see your message:  ${respData.etherealUrl}`);
+        } else {
+            toasts.error("Something went wrong!");
+        }
+        
+        
+           
+                
+                // respData = data;
+                // if (respData != null) {
+                    
+                //     toasts.success("Your message has been sent");
+                // } else {
+                //     toasts.error("Something went wrong");
+                    
+                // }
+            
     }
   
 </script>
@@ -36,6 +50,7 @@
 
 <form id="contact-form">
     <input type="text" placeholder="Email you want us to reply to" id="input-user-email" />
+    <input type="text" placeholder="Your name" id="input-user-name" />
     <input type="text" placeholder="Title" id="input-subject" />
     <input type="text" placeholder="Please descripe your feedback" id="input-message" />
     <button type="submit" id="submit-btn" on:click={fetchContact}>Send message</button>
