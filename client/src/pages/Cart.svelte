@@ -23,14 +23,7 @@
         
         navigate("/");
         toasts.info("Your cart has been cleared");
-        cartItems.set({
-            // title: "",
-            // durationInYears: 0,
-            // ectsPoints: 0,
-            // educationGroup: "",
-            
-
-        });
+        cartItems.set([]);
         console.log( $cartItems );
 
 

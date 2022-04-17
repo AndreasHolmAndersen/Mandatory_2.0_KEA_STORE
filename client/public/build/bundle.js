@@ -3644,12 +3644,7 @@ var app = (function () {
 
     const isLoggedIn = writable(false);
 
-    const cartItems = writable([
-        // title: "",
-        // durationInYears: "",
-        // ectsPoints: "",
-        // educationGroup: ""
-    ]);
+    const cartItems = writable([]);
 
     function notificationsStore(initialValue = []) {
       const store = writable(initialValue);
@@ -6606,7 +6601,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (54:4) {:else}
+    // (47:4) {:else}
     function create_else_block$1(ctx) {
     	let p;
 
@@ -6614,7 +6609,7 @@ var app = (function () {
     		c: function create() {
     			p = element("p");
     			p.textContent = "Please choose an education or more in KEA store !";
-    			add_location(p, file$2, 54, 8, 1534);
+    			add_location(p, file$2, 47, 8, 1385);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -6629,14 +6624,14 @@ var app = (function () {
     		block,
     		id: create_else_block$1.name,
     		type: "else",
-    		source: "(54:4) {:else}",
+    		source: "(47:4) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (41:4) {#if $cartItems.length != 0 | null}
+    // (34:4) {#if $cartItems.length != 0 | null}
     function create_if_block$1(ctx) {
     	let t0;
     	let p;
@@ -6664,8 +6659,8 @@ var app = (function () {
     			t4 = space();
     			button = element("button");
     			button.textContent = "Clear Cart";
-    			add_location(p, file$2, 51, 8, 1364);
-    			add_location(button, file$2, 52, 8, 1455);
+    			add_location(p, file$2, 44, 8, 1215);
+    			add_location(button, file$2, 45, 8, 1306);
     		},
     		m: function mount(target, anchor) {
     			for (let i = 0; i < each_blocks.length; i += 1) {
@@ -6722,14 +6717,14 @@ var app = (function () {
     		block,
     		id: create_if_block$1.name,
     		type: "if",
-    		source: "(41:4) {#if $cartItems.length != 0 | null}",
+    		source: "(34:4) {#if $cartItems.length != 0 | null}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (42:8) {#each $cartItems as cartItem}
+    // (35:8) {#each $cartItems as cartItem}
     function create_each_block(ctx) {
     	let div;
     	let li0;
@@ -6769,15 +6764,15 @@ var app = (function () {
     			t8 = text("Education group: ");
     			t9 = text(t9_value);
     			attr_dev(li0, "class", "cart-li svelte-110i0zv");
-    			add_location(li0, file$2, 43, 12, 1022);
+    			add_location(li0, file$2, 36, 12, 873);
     			attr_dev(li1, "class", "cart-li svelte-110i0zv");
-    			add_location(li1, file$2, 44, 12, 1076);
+    			add_location(li1, file$2, 37, 12, 927);
     			attr_dev(li2, "class", "cart-li svelte-110i0zv");
-    			add_location(li2, file$2, 45, 12, 1159);
+    			add_location(li2, file$2, 38, 12, 1010);
     			attr_dev(li3, "class", "cart-li svelte-110i0zv");
-    			add_location(li3, file$2, 46, 12, 1231);
+    			add_location(li3, file$2, 39, 12, 1082);
     			attr_dev(div, "class", "cart-item svelte-110i0zv");
-    			add_location(div, file$2, 42, 8, 986);
+    			add_location(div, file$2, 35, 8, 837);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -6811,7 +6806,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(42:8) {#each $cartItems as cartItem}",
+    		source: "(35:8) {#each $cartItems as cartItem}",
     		ctx
     	});
 
@@ -6836,9 +6831,9 @@ var app = (function () {
     			ul = element("ul");
     			if_block.c();
     			attr_dev(ul, "class", "cart svelte-110i0zv");
-    			add_location(ul, file$2, 39, 0, 881);
+    			add_location(ul, file$2, 32, 0, 732);
     			attr_dev(div, "class", "container svelte-110i0zv");
-    			add_location(div, file$2, 38, 0, 857);
+    			add_location(div, file$2, 31, 0, 708);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -6903,12 +6898,7 @@ var app = (function () {
     	function clearCart() {
     		navigate("/");
     		toasts.info("Your cart has been cleared");
-
-    		cartItems.set({}); // title: "",
-    		// durationInYears: 0,
-    		// ectsPoints: 0,
-
-    		// educationGroup: "",
+    		cartItems.set([]);
     		console.log($cartItems);
     	}
 
