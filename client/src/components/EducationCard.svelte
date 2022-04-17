@@ -37,7 +37,6 @@
         
         $cartItems = [...$cartItems, cartItem];
        
-        console.log($cartItems);
     }
         
 </script>

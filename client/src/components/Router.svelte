@@ -4,21 +4,13 @@
     import Contact from "../pages/Contact.svelte";
     import Home from "../pages/Home.svelte";
     import { isLoggedIn } from "../stores/stores";
-    import {toasts }  from "svelte-toasts";
+    import { toasts } from "svelte-toasts";
     import PrivateRoute from "./PrivateRoute.svelte";
     import Cart from "../pages/Cart.svelte";
-    
-    
 
-
-
-    export function logout(){
-        console.log($isLoggedIn);
+    export function logout() {
         isLoggedIn.set(false);
-        console.log($isLoggedIn);
     }
-
-    
 </script>
 
 <Router primary={false}>
@@ -32,7 +24,7 @@
             <li class="nav-item">
                 <Link to="/" class="nav-anchors">KEA Store</Link>
             </li>
-            
+
             <li class="nav-item">
                 <Link to="/contact" class="nav-anchors">Contact us</Link>
             </li>
@@ -40,7 +32,6 @@
             <li class="nav-item">
                 <Link to="/cart" class="nav-anchors">Cart</Link>
             </li>
-            
 
             {#if !$isLoggedIn}
                 <li class="nav-item">
@@ -48,34 +39,33 @@
                 </li>
             {:else}
                 <li class="nav-item">
-                    <Link to="/" class="nav-anchors" on:click={ () => {
-                        logout();
-                        toasts.warning("youre now logged out");
-                        }}>Log out</Link>
+                    <Link
+                        to="/"
+                        class="nav-anchors"
+                        on:click={() => {
+                            logout();
+                            toasts.warning("youre now logged out");
+                        }}>Log out</Link
+                    >
                 </li>
             {/if}
         </ul>
     </nav>
     <div>
-        
         <Route path="/login" component={Login} />
-        
-       
+
         <PrivateRoute path="contact" let:location>
-			<Contact/>
-		</PrivateRoute>
+            <Contact />
+        </PrivateRoute>
 
         <PrivateRoute path="/" let:location>
-			<Home/>
-		</PrivateRoute>
+            <Home />
+        </PrivateRoute>
 
         <PrivateRoute path="/cart" let:location>
-			<Cart/>
-		</PrivateRoute>
+            <Cart />
+        </PrivateRoute>
     </div>
-
-    
-
 </Router>
 
 <style>
@@ -83,7 +73,6 @@
         color: white !important;
         text-decoration: none !important;
         height: 100%;
-        
     }
     .logo {
         height: 100px;

@@ -24,7 +24,6 @@
         navigate("/");
         toasts.info("Your cart has been cleared");
         cartItems.set([]);
-        console.log( $cartItems );
 
 
     }
